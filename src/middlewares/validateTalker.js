@@ -1,4 +1,5 @@
 const { regexDate } = require('../utils/regex');
+
 const FAIL_STATUS = 400;
 
 const validateToken = (req, res, next) => {
