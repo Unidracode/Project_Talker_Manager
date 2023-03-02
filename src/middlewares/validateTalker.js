@@ -1,4 +1,5 @@
 const { regexDate } = require('../utils/regex');
+const FAIL_STATUS = 400;
 
 const validateToken = (req, res, next) => {
   const { authorization } = req.headers;
@@ -34,14 +35,21 @@ const validateAge = (req, res, next) => {
       .status(400)
       .send({ message: 'A pessoa palestrante deve ser maior de idade' });
   }
+  if (typeof (age) !== 'number') {
+    return res.status(400).json({ message: 'O campo "age" deve ser do tipo "number"' });
+  }
+  if (!Number.isInteger(age)) {
+    return res.status(400).json(
+      { message: 'O campo "age" deve ser um "number" do tipo inteiro' },
+    );
+  }
   next();
 };
 
 const validateTalk = (req, res, next) => {
   const { talk } = req.body;
-
   if (!talk) {
-    return res.status(400).send({ message: 'O campo "talk" é obrigatório' });
+    return res.status(FAIL_STATUS).json({ message: 'O campo "talk" é obrigatório' });
   }
   next();
 };
