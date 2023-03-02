@@ -5,7 +5,6 @@ const loginRouter = require('./routes/loginRoutes');
 
 const app = express();
 
-
 app.use(express.json());
 app.use(bodyParser.json());
 app.use('/talker', talkersRouter);
